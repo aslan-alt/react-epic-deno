@@ -148,11 +148,16 @@
     "resetMocks": true
   },
   "babel": {
-    "plugins": [
-      "@babel/plugin-proposal-decorators"
-    ],
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ]
     ]
   }
 }
