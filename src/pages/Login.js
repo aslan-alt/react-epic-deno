@@ -1,12 +1,19 @@
 import React from 'react';
+import { observer } from 'mobx-react';
+import { useStores } from '../stores';
 
-function Login() {
+const Component = observer(() => {
+    const { AuthStore } = useStores()
+
+    const bindChange = e => {
+        AuthStore.setUsername(e.target.value)
+    }
     return (
         <>
-            Login:
-            <input type="text" placeholder="cxc" />
+            Login:{AuthStore.values.username}
+            <input type="text" placeholder="cxc" onChange={bindChange} />
         </>
     );
-}
+})
 
-export default Login;
+export default Component;

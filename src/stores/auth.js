@@ -1,6 +1,9 @@
-import { observable, action } from 'mobx'
+import { observable, action, makeObservable } from 'mobx'
 
 class AuthStore {
+    constructor() {
+        makeObservable(this)
+    }
     @observable isLogin = 'xxx'
     @observable isLoading = 'xxx'
     @observable values = {
@@ -36,8 +39,6 @@ class AuthStore {
     }
     @action logout() {
         console.log('已注销')
-
-
     }
 }
 
