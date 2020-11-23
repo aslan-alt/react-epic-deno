@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
+import { Button } from 'antd'
 
 import logo from './logo.svg'
 import styled from 'styled-components';
@@ -30,9 +31,7 @@ const StyledHeader = styled.header`
         button:first-child{
             margin-right:5px;
         }
-        button{
-            padding:10px 30px;
-        }
+       
     }
 `
 
@@ -48,14 +47,8 @@ function Header() {
                 <NavLink to="/history" activeClassName="xxx" >历史</NavLink>
             </nav>
             <div className="login">
-                <button onClick={
-                    () => router.push('/login')
-                }>登陆</button>
-                <button onClick={
-                    () => {
-                        router.push('/register')
-                    }
-                }>注册</button>
+                <Button type="primary" onClick={() => router.push('/login')}>登陆</Button>
+                <Button type="primary" onClick={() => router.push('/register')}>注册</Button>
             </div>
         </StyledHeader>
     )
