@@ -1,4 +1,5 @@
 import { observable, action, makeObservable } from 'mobx'
+import Module from '../modules'
 
 class AuthStore {
     constructor() {

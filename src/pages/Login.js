@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import styled from 'styled-components'
+import { AuthStore } from '@/stores/auth'
 
 const Wrapper = styled.div`
     padding:20px 0;
