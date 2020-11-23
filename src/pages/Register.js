@@ -1,6 +1,14 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import styled from 'styled-components'
 
+const Wrapper = styled.div`
+    padding:20px 0;
+    h1{
+        border:1px solid red;
+        text-align:center;
+    }
+`;
 const layout = {
     labelCol: {
         span: 8,
@@ -42,65 +50,68 @@ const confirmPassword = ({ getFieldValue }) => ({
 
 function Register() {
     return (
-        <Form
-            {...layout}
-            name="basic"
-            initialValues={{
-                remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-        >
-            <Form.Item
-                label="用户名"
-                name="username"
-                rules={[
-                    {
-                        required: true,
-                        message: '请输入用户名',
-                    },
-                    {
-                        validator: Validators.username
-                    }
-                ]}
+        <Wrapper>
+            <h1>注册</h1>
+            <Form
+                {...layout}
+                name="basic"
+                initialValues={{
+                    remember: true,
+                }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
             >
-                <Input />
-            </Form.Item>
+                <Form.Item
+                    label="用户名"
+                    name="username"
+                    rules={[
+                        {
+                            required: true,
+                            message: '请输入用户名',
+                        },
+                        {
+                            validator: Validators.username
+                        }
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
-            <Form.Item
-                label="密码"
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
-            <Form.Item
-                label="再次输入密码"
-                name="confirmPassword"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your password!',
-                    },
-                    confirmPassword
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
+                <Form.Item
+                    label="密码"
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
+                <Form.Item
+                    label="再次输入密码"
+                    name="confirmPassword"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
+                        confirmPassword
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
 
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+                <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                    <Checkbox>Remember me</Checkbox>
+                </Form.Item>
 
-            <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">Submit</Button>
-            </Form.Item>
-        </Form>
+                <Form.Item {...tailLayout}>
+                    <Button type="primary" htmlType="submit">Submit</Button>
+                </Form.Item>
+            </Form>
+        </Wrapper>
     );
 }
 
