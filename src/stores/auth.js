@@ -1,5 +1,5 @@
 import { observable, action, makeObservable } from 'mobx'
-import Module from '../modules'
+import { Auth } from '../modules'
 
 class AuthStore {
     constructor() {
@@ -21,25 +21,38 @@ class AuthStore {
         this.values.password = password
     }
     @action login() {
-        console.log('登陆中...')
+        const { username, password } = this.values
         this.isLoading = true
-        setTimeout(() => {
-            console.log('登陆成功')
-            this.isLoading = true
-            this.isLogin = true
-        }, 1000)
+        return new Promise((resolve, reject) => {
+            Auth.login({ username, password }).then(res => {
+                console.log('登陆成功')
+                this.isLoading = true
+                this.isLogin = true
+                resolve(res)
+            }).catch(err => {
+                console.log('登陆失败')
+                reject(err)
+            })
+        })
+
     }
     @action register() {
-        console.log('注册中...')
+        const { username, password } = this.values
         this.isLoading = true
-        setTimeout(() => {
-            console.log('注册成功')
-            this.isLoading = true
-            this.isLogin = true
-        }, 1000)
+        return new Promise((resolve, reject) => {
+            Auth.register({ username, password }).then(res => {
+                console.log('注册成功')
+                this.isLoading = true
+                this.isLogin = true
+                resolve(res)
+            }).catch(err => {
+                console.log('注册失败')
+                reject(err)
+            })
+        })
     }
     @action logout() {
-        console.log('已注销')
+        return Auth.logout()
     }
 }
 

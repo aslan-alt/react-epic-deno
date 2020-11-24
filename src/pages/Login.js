@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import styled from 'styled-components'
-import { AuthStore } from '@/stores/auth'
+import { useStores } from '../stores/index.js'
+
+
 
 const Wrapper = styled.div`
     padding:20px 0;
@@ -24,24 +26,34 @@ const tailLayout = {
         span: 16,
     },
 };
-const onFinish = (values) => {
-    console.log('Success:', values);
-};
 
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
-const Validators = {//校验,使用callback或者Promise都可以
-    username(rule, value, callback) {
-        console.log(rule, value)
-        if (/\W/.test(value)) return Promise.reject('不能出现字母数字下划线以外的字符')
-        if (value.length < 3) return Promise.reject('用户名不能小于3')
-        if (value.length > 10) return Promise.reject('用户名长度不能大于10')
-        Promise.resolve()
-    }
-}
+
 
 function Login() {
+    const AuthStore = useStores()
+    console.log(AuthStore)
+    console.log('11111')
+    const Validators = {//校验,使用callback或者Promise都可以
+        username(rule, value, callback) {
+            if (/\W/.test(value)) return Promise.reject('不能出现字母数字下划线以外的字符')
+            if (value.length < 3) return Promise.reject('用户名不能小于3')
+            if (value.length > 10) return Promise.reject('用户名长度不能大于10')
+            return Promise.resolve()
+        }
+    }
+    const onFinish = ({ username, password }) => {
+
+        AuthStore.setUsername(username)
+        AuthStore.setPassword(password)
+        AuthStore.login().then(res => {
+            console.log('1')
+            console.log(res)
+        })
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
     return (
         <Wrapper>
             <h1>登陆</h1>
